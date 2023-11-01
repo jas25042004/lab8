@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #scrolling-message {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      white-space: nowrap;
+    }
+
+    #image-box {
+      position: relative;
+      width: 300px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="scrolling-message">Vancouver 2023</div>
+  <div id="image-box">
+    <img id="image1" src="myself.jpg" alt="Photo of Yourself" style="display: block;">
+    <img id="image2" src="tiger.jpg" alt="Tiger" style="display: none;">
+  </div>
+
+  <script>
+    // Function to scroll the message
+    function scrollMessage() {
+      const message = document.getElementById('scrolling-message');
+      message.style.left = window.innerWidth + 'px';
+
+      const speed = 2; // You can adjust the speed
+      const animation = () => {
+        const currentLeft = parseFloat(message.style.left);
+        if (currentLeft + message.clientWidth > 0) {
+          message.style.left = currentLeft - speed + 'px';
+          requestAnimationFrame(animation);
+        } else {
+          message.style.left = window.innerWidth + 'px';
+          animation();
+        }
+      };
+      animation();
+    }
+
+    // Function to toggle between images
+    function toggleImages() {
+      const image1 = document.getElementById('image1');
+      const image2 = document.getElementById('image2');
+
+      setInterval(function() {
+        if (image1.style.display === 'block') {
+          image1.style.display = 'none';
+          image2.style.display = 'block';
+        } else {
+          image1.style.display = 'block';
+          image2.style.display = 'none';
+        }
+      }, 2000); // Change image every 2 seconds
+    }
+
+    window.onload = function() {
+      scrollMessage();
+      toggleImages();
+    };
+  </script>
+</body>
+</html>
+
+ 
